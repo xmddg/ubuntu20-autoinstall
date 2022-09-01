@@ -1,10 +1,11 @@
 for PART_ID in $(./megaclisas-status | grep SSD | awk '{print $1}')
 do
     DISK_ID=$(echo $PART_ID | cut -c 1-4)
-    DISK_PATH=$(./megaclisas-status | grep $DISK_ID | grep RAID | awk -F '|' '{print $8}')
+    DISK_PATH=$(./megaclisas-status | grep $DISK_ID | grep RAID-1 | awk -F '|' '{print $8}')
     if [ -n $DISK_PATH ]
     then
         SYS_DISK=$DISK_PATH
+        break
     fi
 done
 
